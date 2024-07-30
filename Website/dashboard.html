@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- css link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!--script link -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar pl-5" style="background: white; border-bottom: 1px rgb(201 201 201) solid;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="./Image/logo.png"
+                    style="height: 50px; padding-left: 100px;" /></a>
+            <div class="d-flex flex-row-reverse m-2">
+                <button type="submit" onclick="logout()" class="btn" id="submitbtn"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                        <path fill-rule="evenodd"
+                            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                    </svg></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="card w-75 mx-auto mt-3 rounded" id="dashboard-body">
+        <div class="text-light" style="font-size: 25px; padding: 5px 0px 5px 25px; background-color: #0084d6; ">Home
+        </div>
+
+        <div class="card-body m-3">
+
+            <div class="d-flex flex-row-reverse">
+                <button  id="admin"  onclick="goToAddCourse()" class="btn btn-primary btn-lg">Add Course</button> <br />
+            </div>
+            <div id="display-course-list" class="row"></div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        // check is User Is Login or not
+        let Current_User = JSON.parse(sessionStorage.getItem("Current_User"));
+        if (Current_User == null) goToLogin();
+
+        document.getElementById("admin").style.display = "none";
+        if (Current_User.role == "ADMIN") document.getElementById("admin").style.display = "";
+
+        let courseTable = JSON.parse(localStorage.getItem("Courses"));
+        displayCourseList();
+
+        function displayCourseList() {
+            let divOfDisplayCourse = document.getElementById("display-course-list");
+            if (courseTable != null) {
+
+                // Display Couser List 
+                for (let index = 0; index < courseTable.length; index++) {
+
+                    if (courseTable[index].is_deleted == false && courseTable[index].access_learner.includes(Current_User.id)) {
+                        divOfDisplayCourse.innerHTML += `<div onclick="showTHisCourse(${courseTable[index].id})" class="card col-4 m-2" style="higth: 250px; width:250px">
+                                <img src="${courseTable[index].imagelink}" class="text-center"/>
+                                <hr/>
+                                <p class="text-center">${courseTable[index].title}</p>
+                            </div>`;
+                    }
+
+                }
+            }
+        }
+
+        function showTHisCourse(course_id) {
+            // Send User  To show Couser
+            let currentUrl = window.location.href;
+            let fornt_url = currentUrl.slice(0, currentUrl.indexOf("dashboard.html"));
+            location.assign(fornt_url + "Course_Management/showCourse.html?id=" + course_id);
+        }
+
+        function goToAddCourse() {
+            // Send User  To Login Page
+            let currentUrl = window.location.href;
+            let fornt_url = currentUrl.slice(0, currentUrl.indexOf("dashboard.html"));
+            location.assign(fornt_url + "Course_Management/addCourse.html");
+        }
+
+        function goToAddUser() {
+            // Send User  To Dashboard Page
+            let currentUrl = window.location.href;
+            let fornt_url = currentUrl.slice(0, currentUrl.indexOf("dashboard.html"));
+            location.assign(fornt_url + "User_Management/addUser.html");
+        }
+
+        function goToLogin() {
+            // Send User  To Login Page
+            let currentUrl = window.location.href;
+            let fornt_url = currentUrl.slice(0, currentUrl.indexOf("dashboard.html"));
+            location.assign(fornt_url + "User_Management/login.html");
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            goToLogin();
+        }
+
+    </script>
+</body>
+
+</html>
