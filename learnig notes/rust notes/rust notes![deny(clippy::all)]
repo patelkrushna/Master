@@ -1,0 +1,95 @@
+![deny(clippy::all)] 
+// This is a linter for rust Langauge. 
+// It Give the Warnings and Errors while writting rust code.
+
+// This code is all about Variables, Datatypes, Mutability of varible and shadowing in rust
+
+fn main() { 
+    // This is a main function where rust compiler start its Execution.
+    println!("Hello, world!");
+    // This is used to print data on console in newline.
+    
+    let first_name = "Raj"; 
+    // let first_name1: &str = first_name;
+
+    // println!("1 {}", first_name);
+    // println!("2 {}", first_name1);
+    //  This is a immutable variable. 
+    // We use snake_case to give variable name.
+    // first_name = "harsh";  // we can't assign value like this to name variable.
+    
+    const LAST_NAME: &str = "Patel";
+    // This is Constant variable.
+    // We need to write variable name in uppercase.
+
+    println!("hello my name is {} {}",first_name,LAST_NAME);
+
+    let mut a = 23i32;
+    // We can Create mutable variable using 'mut' keyword.
+    // We can write data type at the end of value.
+    
+    println!("Value of 'a' is {}",a);
+    a = 22;
+   // age = "hello"; // We can't change data type of mutable variable.
+   // We can change only it's value.
+    println!("It's new value of 'a' is {}", a);
+
+
+    //                      Shadowing
+
+    // We can create Variable with the same name in th same scope.
+    // The first variablr is shadowed by the second variable.
+    // we can create variable with same name and same type of data and same and different type of data as well.
+
+    let x = 5;
+    let x =x + 1;
+    {
+        let x = x * 2;
+        println!("This is a value of X in the inner Scope {}", x); // 12
+    }
+    println!("This is a value of X in the outer Scope {}", x); // 6
+
+    //                      Data Type
+
+    // &str = string value   Example: "Hello World"
+    // char = Single character value. Example: 'A' or '😎' 
+    // Boolean = True or False.   
+    // i32 = signed integer 32 bit  Example: -20 or 20
+    // u32 = unsigned interger 8 bit  Example: 20
+    // it has 8-bit, 16-bit, 32-bit, 64-bit, 128-bit.
+    // it has arch also which take size of architectur of your OS.
+
+    // Each signed varient can store value from -(2ⁿ⁻¹) to (2ⁿ⁻¹ - 1).
+    // Each unsigned varient can store value from 0 to (2ⁿ - 1).
+
+    // Decimal  Example:98222 or 98_222
+    // Hex  Example: 0xff
+    // Octal    Example: 0o77
+    // Binary   Example: 0b11001100
+    // Byte(u8 only)  Example:b'A'
+
+    // f32 = float value 32 bit  Example: 15.5
+    // Tuple = It group together variety of type into one. Tuple have fixed length once decalred it can not row or shrink in size.
+
+    let x = (2, 15.5, "hello");
+    println!("We can access tuple by using index value {} {} {}", x.0, x.1, x.2);
+
+    // We can assign tuple value to the multiple variable as well
+    let (a,b,c) = x;
+    println!("Value of A {}",a);
+    println!("Value of B {}",b);
+    println!("Value of C {}",c);
+
+
+    //                  Array 
+    // Array is a collection of cariable having same datatype.
+
+    let arr = [1,2,3,4];
+    // To Print whole array we need to use {:?} or {:#?}.
+    println!("Value of array {:?}", arr);
+    println!("Value accesss by index {}",arr[0]);
+
+    // let arr = [1; 5]
+    // It will create an array with all element are 1 and length is 5.
+    
+}
