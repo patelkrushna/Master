@@ -14,6 +14,7 @@ document.getElementById("registerForm").addEventListener("submit", function(even
         } else if (number.length !== 10 || isNaN(number)) {
             alert("Please enter a valid 10-digit number");
         } else {
+           
             localStorage.setItem("username", username);
             localStorage.setItem("password", password);
             localStorage.setItem("firstname", firstname);
@@ -22,6 +23,20 @@ document.getElementById("registerForm").addEventListener("submit", function(even
             localStorage.setItem("number", number);
             
             window.location.href = "login.html";
+            ///this  is also better way to stored data in multiple user
+            // let users=JSON.parse(localStorage.getItem("users"))||[];
+               
+            // const newUser = {
+            //     username: username,
+            //     password: password,
+            //     firstname: firstname,
+            //     lastname: lastname,
+            //     number: number
+            // };
+
+            // users.push(newUser);
+            // localStorage.setItem("users", JSON.stringify(users));
+
         }
     } else {
         alert("Please fill all the fields");
