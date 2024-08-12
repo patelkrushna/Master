@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .tree{
+            width: 100vw;
+        }
+        .options{
+            display: none;
+        }
+        .node{
+            display: flex;
+        }
+        span:hover  .options{
+            display: block;
+        }
+
+        .select{
+            background-color: lightgreen;
+            color: black;
+        }
+    </style>
+</head>
+  <body>
+    <ul class="tree">
+      <li id="root" class="node">
+        <span>ROOT
+            <div class="options">
+                <button onclick="addNode(event)">Add</button>
+                <button onclick="removeNode(event)">Remove</button>
+              </div>
+        </span>
+      </li>
+    </ul>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .tree {
+        width: 100vw;
+      }
+      .options {
+        display: none;
+      }
+      .node {
+        display: flex;
+      }
+      span:hover .options {
+        display: block;
+      }
+
+      .select {
+        background-color: lightgreen;
+        color: black;
+      }
+      .field{
+        display: flex;
+        gap: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="field">
+      <form id="form">
+        <input type="text" id="add" placeholder="Value" />
+        <input type="submit" value="Add" />
+      </form>
+      <button onclick="minHeapSort()">Min Sort</button>
+      <button onclick="maxHeapSort()">Max Sort</button>
+      <button onclick="clearData()">Delete</button>
+    </div>
+
+    <ul id="tree" class="tree"></ul>
+    <script src="script.js"></script>
+  </body>
+</html>
